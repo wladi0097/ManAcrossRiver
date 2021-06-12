@@ -8,7 +8,9 @@ func _ready():
 	
 func reset():
 	$Timer.reset()
-	animationPLayer.play_backwards("credits")
+	control.hide()
+	$AnimatedSprite.hide()
+	$GameEnd.hide()
 
 func playGoToLevel():
 	animationPLayer.play("fade")
@@ -22,7 +24,7 @@ func playPickUpWeapon():
 func playCredits():
 	var ourScores = """
 * TheRealWlad: 02:22:2
-* Lichstart: N/A
+* Lichstart: 01:51:7
 * Vlad: N/A
 """
 	

@@ -30,9 +30,9 @@ func _physics_process(delta):
 	
 func _input(event):
 	pass
-#	if event.is_action_released("debug_weapon_change"):
-#		Global.currentWeapon = Global.currentWeapon + 1
-#		equipWeapon()
+	if event.is_action_released("debug_weapon_change"):
+		Global.currentWeapon = Global.currentWeapon + 1
+		equipWeapon()
 		
 func hasLastWeapon():
 	return Global.currentWeapon == 5
