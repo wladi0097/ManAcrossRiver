@@ -23,12 +23,11 @@ func playPickUpWeapon():
 
 func playCredits():
 	var ourScores = """
-* TheRealWlad: 02:22:2
-* Lichstart: 01:51:7
-* Vlad: N/A
+* TheRealWlad: 02:22:2   * Lichstars: 01:51:7
+* Vlad: 02:23:2
 """
 	
-	$GameEnd/VBoxContainer/ScoreBoard.text = "* You: " + $Timer.stopAndGetTime() + ourScores
+	$GameEnd/VBoxContainer/ScoreBoard.text = "** You: " + $Timer.stopAndGetTime() + " **" + ourScores
 	
 	yield(get_tree().create_timer(1), "timeout")
 	animationPLayer.play("credits")
