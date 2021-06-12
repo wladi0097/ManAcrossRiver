@@ -1,0 +1,233 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://models/player1-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://entities/player/player.gd" type="Script" id=2]
+[ext_resource path="res://models/sword1.png" type="Texture" id=3]
+[ext_resource path="res://models/player1.png" type="Texture" id=4]
+[ext_resource path="res://models/swordcomb123.png" type="Texture" id=5]
+[ext_resource path="res://models/swordcomb12.png" type="Texture" id=6]
+[ext_resource path="res://models/swordcomb1234.png" type="Texture" id=7]
+[ext_resource path="res://models/swordcomb12345.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "reach"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 170.0, 180.0, 190.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Player:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "happy",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 15.3563, 11.7309 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 16.933, 13.4127 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 8.95876, 4.99104 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 10.2633, 8.07136 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 22.7057, 5.65765 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 23.8524, 8.15687 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 36.0022, 6.27271 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 39.0657, 8.57751 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 64.6598, 7.00086 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 67.6695, 8.57754 )
+
+[node name="Player" type="KinematicBody2D"]
+rotation = 3.14159
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.4, 0.4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/reach = SubResource( 1 )
+anims/walk = SubResource( 2 )
+
+[node name="Player" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+animation = "walk"
+flip_v = true
+
+[node name="playerCollision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.315331, 0.420448 )
+shape = SubResource( 7 )
+
+[node name="sword" type="Sprite" parent="."]
+position = Vector2( 54.9743, 1.02554 )
+
+[node name="swordCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 54.5532, 0.840897 )
+
+[node name="SwordDetection" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="swordDetectionCollision" type="CollisionShape2D" parent="SwordDetection"]
+position = Vector2( 57.2861, 1.26134 )
+
+[node name="PlayerAttacked" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAttacked"]
+shape = SubResource( 8 )
+
+[node name="Swords" type="Node" parent="."]
+
+[node name="1" type="Node2D" parent="Swords"]
+visible = false
+
+[node name="sword" type="Sprite" parent="Swords/1"]
+position = Vector2( 23.5685, 1.25992 )
+texture = ExtResource( 3 )
+
+[node name="swordCollision" type="CollisionShape2D" parent="Swords/1"]
+position = Vector2( 24.1374, 1.40308 )
+shape = SubResource( 9 )
+
+[node name="swordDetectionCollision" type="CollisionShape2D" parent="Swords/1"]
+position = Vector2( 25.2487, 1.65178 )
+shape = SubResource( 10 )
+
+[node name="2" type="Node2D" parent="Swords"]
+visible = false
+
+[node name="swordCollision" type="CollisionShape2D" parent="Swords/2"]
+position = Vector2( 37.7437, 0.969278 )
+shape = SubResource( 11 )
+
+[node name="swordDetectionCollision" type="CollisionShape2D" parent="Swords/2"]
+position = Vector2( 38.6992, 1.15603 )
+shape = SubResource( 12 )
+
+[node name="sword" type="Sprite" parent="Swords/2"]
+position = Vector2( 39.0056, 0.841846 )
+texture = ExtResource( 6 )
+
+[node name="3" type="Node2D" parent="Swords"]
+visible = false
+
+[node name="swordCollision" type="CollisionShape2D" parent="Swords/3"]
+position = Vector2( 52.9326, 1.68945 )
+shape = SubResource( 13 )
+
+[node name="swordDetectionCollision" type="CollisionShape2D" parent="Swords/3"]
+position = Vector2( 52.4969, 1.78691 )
+shape = SubResource( 14 )
+
+[node name="sword" type="Sprite" parent="Swords/3"]
+position = Vector2( 54.8289, 1.67938 )
+texture = ExtResource( 5 )
+
+[node name="4" type="Node2D" parent="Swords"]
+visible = false
+
+[node name="sword" type="Sprite" parent="Swords/4"]
+position = Vector2( 79.0442, 1.89202 )
+texture = ExtResource( 7 )
+
+[node name="swordCollision" type="CollisionShape2D" parent="Swords/4"]
+position = Vector2( 73.5784, 1.99712 )
+shape = SubResource( 15 )
+
+[node name="swordDetectionCollision" type="CollisionShape2D" parent="Swords/4"]
+position = Vector2( 75.996, 2.20735 )
+shape = SubResource( 16 )
+
+[node name="5" type="Node2D" parent="Swords"]
+visible = false
+
+[node name="sword" type="Sprite" parent="Swords/5"]
+position = Vector2( 79.0442, 1.89202 )
+texture = ExtResource( 8 )
+
+[node name="swordCollision" type="CollisionShape2D" parent="Swords/5"]
+position = Vector2( 77.9438, 1.52518 )
+shape = SubResource( 15 )
+
+[node name="swordDetectionCollision" type="CollisionShape2D" parent="Swords/5"]
+position = Vector2( 80.8333, 1.73541 )
+shape = SubResource( 16 )
+
+[connection signal="body_entered" from="SwordDetection" to="." method="_on_SwordDetection_body_entered"]
+[connection signal="body_entered" from="PlayerAttacked" to="." method="_on_PlayerAttacked_body_entered"]
