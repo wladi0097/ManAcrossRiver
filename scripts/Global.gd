@@ -13,6 +13,9 @@ var currentWeapon = 1
 var currentLevel = 0
 var player
 
+var hasGriffithMonolith = false
+var hasGameCompleted = false
+
 func _ready():
 	pass
 	
@@ -22,6 +25,9 @@ func _input(event):
 		self.currentWeapon = 1
 		self.currentLevel = 0
 		get_tree().change_scene_to(hub)
+		
+func redrawPlayerEasterEggs():
+	player.drawEasterEggs()
 
 func pickUpNextWeapon():
 	SwitchSzene.playPickUpWeapon()
@@ -38,4 +44,5 @@ func switchToHub():
 	get_tree().change_scene_to(hub)
 	
 func switchToGameEnd():
+	self.hasGameCompleted = true
 	SwitchSzene.playCredits()

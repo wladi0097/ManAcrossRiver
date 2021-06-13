@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://models/player1-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://models/swordcomb12.png" type="Texture" id=6]
 [ext_resource path="res://models/swordcomb1234.png" type="Texture" id=7]
 [ext_resource path="res://models/swordcomb12345.png" type="Texture" id=8]
+[ext_resource path="res://models/sword5.png" type="Texture" id=9]
+[ext_resource path="res://models/Sign of Sacrafice.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "reach"
@@ -132,6 +134,23 @@ anims/walk = SubResource( 2 )
 [node name="Player" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "walk"
+flip_v = true
+
+[node name="EEGameCompleted" type="Sprite" parent="."]
+visible = false
+position = Vector2( -15.6298, -0.168985 )
+rotation = -0.254818
+scale = Vector2( 0.621049, 0.705401 )
+texture = ExtResource( 9 )
+flip_h = true
+flip_v = true
+
+[node name="EEBerserk" type="Sprite" parent="."]
+visible = false
+position = Vector2( -0.322676, 4.73207 )
+rotation = 3.14159
+scale = Vector2( 0.665332, 0.591511 )
+texture = ExtResource( 10 )
 flip_v = true
 
 [node name="playerCollision" type="CollisionShape2D" parent="."]

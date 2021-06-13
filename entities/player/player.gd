@@ -8,12 +8,15 @@ var swordSpeeds = [0.1, 0.07, 0.05, 0.03, 0.01]
 var canMove = true
 var ready = false
 onready var playerSprite := $Player
+onready var eeGameCompleted := $EEGameCompleted
+onready var eeBerserk := $EEBerserk
 onready var Sword := $Sword
 onready var animationPlayer := $AnimationPlayer
 
 func _ready():
 	Global.player = self
 	self.equipWeapon()
+	self.drawEasterEggs()
 	
 	if tryToReachManAcrossRiver:
 		canMove = false
@@ -27,6 +30,11 @@ func _physics_process(delta):
 	
 	self.movement(delta)
 	self.mouseMovement()
+	
+func drawEasterEggs():
+	print(Global.hasGriffithMonolith)
+	eeGameCompleted.visible = Global.hasGameCompleted
+	eeBerserk.visible = Global.hasGriffithMonolith
 	
 func hasLastWeapon():
 	return Global.currentWeapon == 5
@@ -75,7 +83,12 @@ func movement(delta):
 	
 func mouseMovement():
 	var newRotation = lerp_angle(self.rotation, get_global_mouse_position().angle_to_point(self.position), self.swordSpeed)
-	playerSprite.set_flip_v( get_global_mouse_position().x < self.global_position.x )
+	var shouldFlip = get_global_mouse_position().x < self.global_position.x
+	
+	playerSprite.set_flip_v(shouldFlip)
+	eeGameCompleted.set_flip_v(shouldFlip)
+	eeBerserk.set_flip_v(!shouldFlip)
+	eeBerserk.offset = Vector2(0,0) if shouldFlip else Vector2(0, 15)
 	self.rotation = newRotation
 	
 func _on_SwordDetection_body_entered(body):
