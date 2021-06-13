@@ -23,7 +23,7 @@ func playPickUpWeapon():
 
 func playCredits():
 	var ourScores = """
-* TheRealWlad: 02:22:2   * Lichstars: 01:51:7
+* TheRealWlad: 01:49:7   * Lichstars: 01:39:0
 * Vlad: 02:23:2
 """
 	
